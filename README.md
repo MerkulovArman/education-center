@@ -24,5 +24,5 @@ The JMSMDB module are collected in war.
 > Curl commands for the application deployed in application context `jms-mdb`. For Windows use `Git Bash`.
 
 #### send message to topic and get message to rest
-    curl -X POST -H "Content-Type: text/plain" --data " Arman" http://localhost:8080/jms-mdb/rest/hello
+    curl -X POST -H "Content-Type: text/plain" --data "Arman" http://localhost:8080/jms-mdb/rest/hello
     

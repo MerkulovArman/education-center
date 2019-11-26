@@ -27,7 +27,7 @@ public class Producer {
         try(Connection connection = factory.createConnection();
             Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE)) {
             MessageProducer producer = session.createProducer(destination);
-            helloMessage = "Hello" + name + "!";
+            helloMessage = "Hello " + name + "!";
             producer.send(session.createTextMessage(helloMessage));
             System.out.println("--------------------------------------------------");
         } catch (JMSException e) {
