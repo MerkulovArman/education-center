@@ -17,7 +17,10 @@ public class Producer {
     private ConnectionFactory factory;
 
     @Resource(name = "topic")
-    private Destination destination;
+    private Destination topicDestination;
+
+    @Resource(name = "queue")
+    private Destination queueDestination;
 
     @POST
     @Produces(MediaType.TEXT_PLAIN)
@@ -26,9 +29,11 @@ public class Producer {
         String helloMessage = "";
         try(Connection connection = factory.createConnection();
             Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE)) {
-            MessageProducer producer = session.createProducer(destination);
+            MessageProducer topicProducer = session.createProducer(topicDestination);
+            MessageProducer queueProducer = session.createProducer(queueDestination);
             helloMessage = "Hello " + name + "!";
-            producer.send(session.createTextMessage(helloMessage));
+            topicProducer.send(session.createTextMessage(helloMessage));
+            queueProducer.send(session.createTextMessage(helloMessage));
             System.out.println("--------------------------------------------------");
         } catch (JMSException e) {
             e.printStackTrace();
